@@ -3,10 +3,25 @@
 <head><title>AO3 RSS subscriptions</title></head>
 <body>
 <script>
-var target = location.pathname.split('?')[1];
-alert(target);
+
+async function getpage(url) {
+    let response = await fetch(url);
+    let res = await response.body;
+    return res;
+}
+
+var target = location.search.substring(1);
+if (target.match(/works/).length > 0) {
+    var srcurl = "https://archiveofourown.org/" + target;
+    if (!srcurl.endsWith('/'))
+        srcurl += '/';
+    if (target.match(/navigate\//).length == 0)
+        srcurl += "navigate/";
+    let htmlbody = getpage(srcurl);
+    console.log(htmlbody);
+}
 </script>
-THIS PAGE DOES NOT WORK YET, SORRY
+THIS PAGE DOES NOT WORK YET, SORRY <br><br>
 
 For a subscription, take the URL of the book (placeholder example that probably links to nothing:
 https://archiveofourown.org/works/1234567890/), cut the starting bit (so you end up with something like
